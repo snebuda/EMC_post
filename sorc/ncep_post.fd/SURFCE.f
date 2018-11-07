@@ -2637,6 +2637,39 @@
       ENDIF
 !
 ! SRD
+
+!       Ice Growth Rate
+!
+
+      IF (IGET(588).GT.0) THEN
+         ID(1:25) = 0
+         ISVALUE = 10
+         DO J=JSTA,JEND
+           DO I=1,IM
+             GRID1(I,J) = 1.0
+           ENDDO
+         ENDDO
+         if(grib=='grib1') then
+           CALL GRIBIT(IGET(422),LVLS(1,IGET(422)),GRID1,IM,JM)
+         elseif(grib=='grib2') then
+           cfld=cfld+1
+           fld_info(cfld)%ifld=IAVBLFLD(IGET(422))
+           if (ifhr.eq.0) then
+              fld_info(cfld)%tinvstat=0
+           else
+              fld_info(cfld)%tinvstat=1
+           endif
+           fld_info(cfld)%ntrange=1
+!$omp parallel do private(i,j,jj)
+           do j=1,jend-jsta+1
+             jj = jsta+j-1
+             do i=1,im
+               datapd(i,j,cfld) = GRID1(i,jj)
+             enddo
+           enddo
+         endif
+      ENDIF
+     
 !
 !
 !***  BLOCK 4.  PRECIPITATION RELATED FIELDS.
