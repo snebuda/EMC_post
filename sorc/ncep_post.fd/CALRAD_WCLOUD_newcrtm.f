@@ -577,6 +577,8 @@ SUBROUTINE CALRAD_WCLOUD
            if(isis=='ssmis_f19')channelinfo(sensorindex)%WMO_Satellite_Id=287
            if(isis=='ssmis_f20')channelinfo(sensorindex)%WMO_Satellite_Id=289
 !          quiet verbose output warning messages
+           if(isis=='abi_gr')channelinfo(sensorindex)%WMO_Satellite_Id=270
+           if(isis=='abi_gr')channelinfo(sensorindex)%WMO_Sensor_Id=617
            if(isis=='abi_g16')channelinfo(sensorindex)%WMO_Satellite_Id=270
            if(isis=='abi_g16')channelinfo(sensorindex)%WMO_Sensor_Id=617
            if(isis=='abi_g17')channelinfo(sensorindex)%WMO_Satellite_Id=271
